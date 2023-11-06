@@ -12,11 +12,10 @@ class App34 extends StatefulWidget {
 }
 
 class _App34State extends State<App34> {
-  int _index = 0, idtareaaux = 0, contador=0;
+  int _index = 0, contador=0;
   String? selectedMateria;
   List<Tarea> data = [];
   List<Materia> materias = [];
-  List<String> semestres  = ["ENE-JUN2020","AGO-DIC2020","ENE-JUN2021","AGO-DIC2021","ENE-JUN2022","AGO-DIC2022","ENE-JUN2023","AGO-DIC2023"];
   String idm = "";
   String fechaActual  = DateTime.now().toString().split(" ")[0];
 
@@ -199,13 +198,13 @@ class _App34State extends State<App34> {
             ElevatedButton(
                 onPressed: () {
                   var temporal = Tarea(
-                      idtarea: idtareaaux+1,
                       idmateria: idm,
                       f_entrega: f_entrega.text,
-                      descripcion: descripcion.text);
+                      descripcion: descripcion.text,
+                      idtarea: 0,
+                  );
                   DB.insertarTarea(temporal).then((value) {
                     setState(() {
-                      idtareaaux += 1;
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("SE INSERTÓ CON ÉXITO")));
                     });
                     idmateria.text = "";
